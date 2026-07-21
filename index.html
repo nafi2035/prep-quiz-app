@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#1E3A8A">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Prep & Quiz - Blue Oak Consulting</title>
+    <title>Interview Prep - Blue Oak Consulting</title>
     <style>
         :root {
             --primary: #1E3A8A;
@@ -17,45 +16,34 @@
             --text-muted: #475569;
             --accent: #059669;
             --warning: #D97706;
-            --danger: #DC2626;
             --border: #E2E8F0;
-            --shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--text);
             padding-bottom: 75px;
-            -webkit-tap-highlight-color: transparent;
         }
 
         header {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             padding: 1rem;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        header h1 {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        header p {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
+        header h1 { font-size: 1.1rem; }
+        header p { font-size: 0.8rem; opacity: 0.8; }
 
         .container {
             padding: 1rem;
@@ -65,12 +53,9 @@
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.3s ease-in;
+            animation: fadeIn 0.3s;
         }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -83,34 +68,82 @@
             padding: 1.2rem;
             margin-bottom: 1rem;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .word-title {
-            font-size: 1.3rem;
-            font-weight: bold;
+        .card h2, .card h3 {
             color: var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
         }
 
-        .word-phonetic {
+        .card h2 { font-size: 1.1rem; }
+        .card h3 { font-size: 1rem; }
+
+        .btn {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
             font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn:active { transform: scale(0.97); }
+        .btn-success { background: var(--accent); }
+        .btn-danger { background: #DC2626; }
+        .btn-outline { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+
+        .audio-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .btn-audio {
+            background: #F1F5F9;
+            border: 1px solid var(--border);
+            padding: 0.6rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-audio:active {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .phonetic {
             color: var(--warning);
             font-weight: 600;
-            margin: 0.2rem 0;
+            font-size: 0.95rem;
         }
 
-        .word-translation {
-            font-size: 0.85rem;
+        .translation {
             color: var(--text-muted);
-            margin-bottom: 0.8rem;
             font-style: italic;
+            font-size: 0.85rem;
         }
 
-        .mouth-instruction {
+        .syllables {
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .mouth-guide {
             background: #EFF6FF;
             border-left: 4px solid var(--primary-light);
             padding: 0.8rem;
@@ -118,147 +151,71 @@
             font-size: 0.85rem;
             line-height: 1.4;
             color: #1E40AF;
-            margin-bottom: 1rem;
-        }
-
-        .audio-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
             margin-bottom: 0.8rem;
         }
 
-        .btn-audio {
-            background: #F1F5F9;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 0.6rem 0.3rem;
-            border-radius: 8px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s;
-            touch-action: manipulation;
-        }
-
-        .btn-audio:active {
-            background: var(--primary-light);
-            color: white;
-            transform: scale(0.95);
-        }
-
-        .syllables-badge {
-            background: #FEF3C7;
-            color: #92400E;
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            display: inline-block;
-        }
-
-        .search-box {
+        .vocab-table {
             width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            outline: none;
-        }
-
-        .search-box:focus {
-            border-color: var(--primary-light);
-        }
-
-        .word-count {
-            text-align: center;
-            color: var(--text-muted);
+            border-collapse: collapse;
             font-size: 0.85rem;
-            margin-bottom: 1rem;
         }
 
-        .quiz-input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            margin: 0.8rem 0;
-            outline: none;
-            transition: border-color 0.2s;
-            -webkit-appearance: none;
-        }
-
-        .quiz-input:focus {
-            border-color: var(--primary-light);
-        }
-
-        .quiz-feedback {
-            padding: 0.8rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            display: none;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .quiz-feedback.correct {
-            background: #D1FAE5;
-            color: var(--accent);
-            display: block;
-        }
-
-        .quiz-feedback.wrong {
-            background: #FEE2E2;
-            color: var(--danger);
-            display: block;
-        }
-
-        .score-display {
+        .vocab-table th {
             background: var(--primary);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 1rem;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .vocab-table td {
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vocab-table tr:nth-child(even) { background: #F8FAFC; }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            color: var(--primary-light);
+        }
+
+        .checklist li.checked:before {
+            content: "☑";
+            color: var(--accent);
+        }
+
+        .question-box {
+            font-size: 1rem;
             font-weight: 600;
+            padding: 0.5rem;
+            background: #F8FAFC;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            min-height: 3em;
         }
 
-        .interviewer-card {
-            text-align: center;
-        }
-
-        .avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: #DBEAFE;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin: 0 auto 0.8rem auto;
-            border: 3px solid var(--primary-light);
-            transition: transform 0.3s;
-        }
-
-        .avatar.speaking {
-            animation: bounce 0.5s infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
+        .transcript-box {
+            background: #F1F5F9;
+            padding: 0.8rem;
+            border-radius: 8px;
+            min-height: 70px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border: 1px dashed var(--border);
+            margin-bottom: 0.8rem;
         }
 
         .status-badge {
@@ -267,10 +224,9 @@
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 0.8rem;
             background: #E2E8F0;
             color: var(--text-muted);
-            transition: all 0.3s;
+            margin-bottom: 0.8rem;
         }
 
         .status-badge.speaking {
@@ -285,124 +241,83 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
-        .question-box {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            min-height: 2.5em;
-            padding: 0.5rem;
-            background: #F8FAFC;
-            border-radius: 8px;
-        }
-
-        .transcript-box {
-            background: #F1F5F9;
-            border-radius: 8px;
-            padding: 0.8rem;
-            min-height: 70px;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-align: left;
-            margin-bottom: 1rem;
-            border: 1px dashed var(--border);
-            word-wrap: break-word;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .btn {
-            background: var(--primary-light);
-            color: white;
-            border: none;
-            padding: 0.7rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 0.5rem;
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #DBEAFE;
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
-            transition: all 0.2s;
-            touch-action: manipulation;
+            font-size: 1.8rem;
+            margin: 0 auto 0.8rem;
+            border: 3px solid var(--primary-light);
         }
 
-        .btn:active {
-            transform: scale(0.97);
+        .avatar.speaking {
+            animation: bounce 0.5s infinite alternate;
         }
 
-        .btn-success {
-            background: var(--accent);
-        }
-        .btn-danger {
-            background: var(--danger);
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
+        @keyframes bounce {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
 
-        nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            display: flex;
-            border-top: 1px solid var(--border);
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
-
-        .nav-item {
-            flex: 1;
+        .score-display {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 8px;
             text-align: center;
-            padding: 0.6rem 0;
-            background: none;
-            border: none;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            touch-action: manipulation;
-        }
-
-        .nav-item.active {
-            color: var(--primary-light);
-            font-weight: bold;
-        }
-
-        .nav-item div {
-            font-size: 1.1rem;
-            margin-bottom: 2px;
-        }
-
-        .nav-item:active {
-            transform: scale(0.95);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: var(--border);
-            border-radius: 2px;
             margin-bottom: 1rem;
-            overflow: hidden;
+            font-weight: 600;
         }
 
-        .progress-bar-fill {
-            height: 100%;
-            background: var(--primary-light);
-            transition: width 0.5s ease;
-            width: 0%;
+        .quiz-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 0.8rem 0;
+            outline: none;
+        }
+
+        .quiz-input:focus { border-color: var(--primary-light); }
+
+        .quiz-feedback {
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            background: #D1FAE5;
+            color: var(--accent);
+            display: block;
+        }
+
+        .quiz-feedback.wrong {
+            background: #FEE2E2;
+            color: #DC2626;
+            display: block;
+        }
+
+        .presentation-text {
+            background: #F1F5F9;
+            padding: 1rem;
+            border-radius: 8px;
+            line-height: 1.8;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .toast {
@@ -423,178 +338,205 @@
             text-align: center;
         }
 
-        .toast.show {
-            opacity: 1;
-        }
+        .toast.show { opacity: 1; }
 
-        .vocab-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            margin: 1rem 0;
-        }
-
-        .vocab-table th {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem;
-            text-align: left;
-        }
-
-        .vocab-table td {
-            padding: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .vocab-table tr:nth-child(even) {
-            background: #F8FAFC;
-        }
-
-        .checklist {
-            list-style: none;
-            padding: 0;
-        }
-
-        .checklist li {
-            padding: 0.5rem;
-            border-bottom: 1px solid var(--border);
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 0.6rem 0;
+            background: none;
+            border: none;
+            font-size: 0.75rem;
+            color: var(--text-muted);
             cursor: pointer;
         }
 
-        .checklist li:before {
-            content: "☐";
-            font-size: 1.2rem;
+        .nav-item.active {
             color: var(--primary-light);
+            font-weight: bold;
         }
 
-        .checklist li.checked:before {
-            content: "☑";
-            color: var(--accent);
+        .nav-item div { font-size: 1.1rem; }
+
+        .search-box {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
         }
 
-        .category-tag {
-            display: inline-block;
-            background: var(--primary-light);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            margin-right: 0.5rem;
+        .search-box:focus { border-color: var(--primary-light); }
+
+        .word-count {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
         }
 
-        .presentation-text {
+        .question-item {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .question-item strong { color: var(--primary); }
+        .question-item .answer {
+            margin-top: 0.3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .question-to-ask {
+            padding: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .question-to-ask:before { content: "📌 "; }
+
+        .email-template {
             background: #F1F5F9;
             padding: 1rem;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.8;
-            max-height: 300px;
-            overflow-y: auto;
+            white-space: pre-line;
+        }
+
+        .company-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0.3rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .company-info .label { font-weight: 600; color: var(--primary); }
+
+        @media (max-width: 480px) {
+            .audio-group { grid-template-columns: 1fr 1fr 1fr; }
+            .company-info { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🏢 Blue Oak Consulting</h1>
-        <p>Entraînement Anglais & Entretien - Tous les mots</p>
+        <h1>🎯 Interview Prep</h1>
+        <p>Blue Oak Consulting - Entraînement Anglais</p>
     </header>
 
     <div class="container">
 
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progress-fill"></div>
-        </div>
-
-        <!-- TAB 1: TOUS LES MOTS -->
+        <!-- TAB 1: PRONONCIATION -->
         <div id="tab-pronunciation" class="tab-content active">
             <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem;">
-                📚 Tous les mots de l'interview
+                🗣️ Prononciation des mots clés
             </h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-                Apprenez la prononciation exacte de chaque mot utilisé dans votre préparation d'entretien.
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+                Apprenez à prononcer parfaitement chaque mot de votre préparation.
             </p>
 
             <input type="text" class="search-box" id="searchWords" placeholder="🔍 Rechercher un mot..." onkeyup="filterWords()">
-
-            <div class="word-count" id="wordCount">Affichage de 0 mots</div>
-
-            <div id="pronunciation-cards-container"></div>
+            <div class="word-count" id="wordCount"></div>
+            <div id="words-container"></div>
         </div>
 
-        <!-- TAB 2: QUIZ -->
-        <div id="tab-quiz" class="tab-content">
+        <!-- TAB 2: CONTENU COMPLET -->
+        <div id="tab-content" class="tab-content">
             <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem;">
-                ✍️ Quiz : Écrire les mots
-            </h2>
-            <div class="score-display">
-                🏆 Score : <span id="score-value">0</span> / <span id="total-questions">0</span>
-            </div>
-            <div class="card" id="quiz-card">
-                <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;" id="quiz-instruction">
-                    Écoutez le mot et écrivez-le ci-dessous :
-                </p>
-                <div class="audio-group" style="margin-bottom: 1rem;">
-                    <button class="btn-audio" onclick="playQuizAudio(1.0)">🔊 Normal</button>
-                    <button class="btn-audio" onclick="playQuizAudio(0.4)">🐢 Lent</button>
-                    <button class="btn-audio" onclick="playQuizSyllables()">🧩 Syllabes</button>
-                </div>
-                <p style="font-size: 0.85rem; color: var(--text-muted);" id="quiz-hint-text">Indice : [...]</p>
-                <input type="text" id="quiz-input" class="quiz-input" placeholder="Tapez le mot en anglais ici..." autocomplete="off">
-                <button class="btn btn-success" onclick="checkQuizAnswer()">✅ Valider</button>
-                <div id="quiz-feedback" class="quiz-feedback"></div>
-                <button id="btn-next-quiz" class="btn btn-outline" onclick="nextQuizQuestion()" style="display: none; margin-top: 0.8rem;">
-                    Question suivante ➔
-                </button>
-            </div>
-        </div>
-
-        <!-- TAB 3: SIMULATEUR -->
-        <div id="tab-simulator" class="tab-content">
-            <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem;">
-                🎙️ Simulateur d'Entretien
+                📚 Préparation complète
             </h2>
 
-            <!-- Présentation -->
+            <!-- 1. Company Overview -->
             <div class="card">
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">🎤 Votre Présentation (2 min)</h3>
+                <h3>📋 Company Overview</h3>
+                <div class="company-info">
+                    <span class="label">Founder</span><span>Chris Thomas</span>
+                    <span class="label">Specialty</span><span>Fractional CFO services for industrial SMEs</span>
+                    <span class="label">Services</span><span>Cash flow management, profitability analysis, financial forecasting</span>
+                    <span class="label">Mission</span><span>"Stop guessing. Get the financial visibility you need to run a stronger, more profitable business."</span>
+                    <span class="label">Size</span><span>Small company (2-10 employees)</span>
+                    <span class="label">Location</span><span>Denton, Texas (remote team)</span>
+                </div>
+            </div>
+
+            <!-- 2. Your Introduction -->
+            <div class="card">
+                <h3>🎤 Your Introduction (2 minutes)</h3>
                 <div class="presentation-text" id="presentationText">
-                    <em>"Good morning, my name is Nafissetou Ntoue Mounchili. I'm a Junior Front-End Web Developer passionate about data visualization and creating user-friendly interfaces.</em><br><br>
-                    <em>I have strong skills in HTML, CSS, JavaScript, and Git. I've built two complete personal projects: a financial dashboard for tracking transactions with interactive charts, and a multi-unit converter that uses a live API for exchange rates.</em><br><br>
-                    <em>What attracts me to Blue Oak Consulting is your mission: helping businesses achieve financial clarity through practical tools. I believe my skills in data visualization and my attention to detail can contribute to your internal tools.</em><br><br>
-                    <em>I'm fully available for remote work and eager to learn from experienced mentors."</em>
+"Good morning, my name is Nafissetou Ntoue Mounchili. I'm a Junior Front-End Web Developer passionate about data visualization and creating user-friendly interfaces.
+
+I have strong skills in HTML, CSS, JavaScript, and Git. I've built two complete personal projects: a financial dashboard for tracking transactions with interactive charts, and a multi-unit converter that uses a live API for exchange rates.
+
+What attracts me to Blue Oak Consulting is your mission: helping businesses achieve financial clarity through practical tools. I believe my skills in data visualization and my attention to detail can contribute to your internal tools.
+
+I'm fully available for remote work and eager to learn from experienced mentors."
                 </div>
-                <button class="btn" onclick="playFullPresentation()">🔊 Écouter toute la présentation</button>
+                <button class="btn" onclick="playAudio(document.getElementById('presentationText').textContent, 0.8)">🔊 Écouter la présentation</button>
             </div>
 
-            <!-- Simulateur -->
-            <div class="card interviewer-card">
-                <div class="avatar" id="avatar">👨‍💼</div>
-                <div id="status-badge" class="status-badge">Prêt à démarrer</div>
-                <div class="question-box" id="question-display">
-                    Cliquez sur "Démarrer l'entretien"
-                </div>
-                <div class="transcript-box" id="transcript-display">
-                    <i>Votre réponse s'affichera ici...</i>
-                </div>
-                <button id="btn-main" class="btn btn-success" onclick="startOrNextQuestion()">
-                    ▶️ Démarrer l'entretien
-                </button>
-                <button id="btn-mic" class="btn btn-outline" onclick="toggleListening()" style="display: none;">
-                    🎙️ Parler / Répondre
-                </button>
-            </div>
-
-            <!-- Vocabulaire -->
+            <!-- 3. General Questions -->
             <div class="card">
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">📚 Vocabulaire Clé</h3>
+                <h3>💬 General Questions</h3>
+                <div id="general-questions"></div>
+            </div>
+
+            <!-- 4. Technical Questions -->
+            <div class="card">
+                <h3>💻 Technical Questions</h3>
+                <div id="technical-questions"></div>
+            </div>
+
+            <!-- 5. Behavioral Questions -->
+            <div class="card">
+                <h3>🧠 Behavioral Questions</h3>
+                <div id="behavioral-questions"></div>
+            </div>
+
+            <!-- 6. Questions to Ask -->
+            <div class="card">
+                <h3>🙋 Questions to Ask the Interviewer</h3>
+                <div id="questions-to-ask"></div>
+            </div>
+
+            <!-- 7. Thank You Email -->
+            <div class="card">
+                <h3>📧 Thank You Email</h3>
+                <div class="email-template">
+Subject: Thank you for the interview - Nafissetou Ntoue Mounchili
+
+Dear Chris,
+
+Thank you for taking the time to speak with me today.
+
+I really enjoyed our conversation, especially learning more about your KPI Dashboard and the mission of Blue Oak Consulting. It confirmed my interest in contributing to your projects and joining your team.
+
+I remain available for any additional questions.
+
+Best regards,
+Nafissetou Ntoue Mounchili
+📧 your.email@example.com
+📱 +237 X XX XX XX XX
+                </div>
+            </div>
+
+            <!-- Key Vocabulary -->
+            <div class="card">
+                <h3>🎯 Key Vocabulary</h3>
                 <table class="vocab-table">
-                    <thead>
-                        <tr><th>English</th><th>Français</th></tr>
-                    </thead>
+                    <thead><tr><th>English</th><th>Français</th></tr></thead>
                     <tbody>
                         <tr><td>Financial clarity</td><td>Clarté financière</td></tr>
                         <tr><td>Dashboard</td><td>Tableau de bord</td></tr>
@@ -609,17 +551,71 @@
                 </table>
             </div>
 
+            <!-- Pronunciation Tips -->
+            <div class="card">
+                <h3>🗣️ Pronunciation Tips</h3>
+                <table class="vocab-table">
+                    <thead><tr><th>Word</th><th>Pronunciation</th></tr></thead>
+                    <tbody>
+                        <tr><td>Dashboard</td><td>/ˈdæʃ.bɔːrd/</td></tr>
+                        <tr><td>Visualisation</td><td>/ˌvɪʒ.u.ə.laɪˈzeɪ.ʃən/</td></tr>
+                        <tr><td>Autonomy</td><td>/ɔːˈtɑː.nə.mi/</td></tr>
+                        <tr><td>Accountability</td><td>/əˌkaʊn.təˈbɪl.ə.ti/</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
             <!-- Checklist -->
             <div class="card">
-                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">✅ Checklist</h3>
+                <h3>✅ Final Checklist</h3>
                 <ul class="checklist">
-                    <li onclick="toggleCheck(this)">Je connais l'entreprise et sa mission</li>
-                    <li onclick="toggleCheck(this)">Je peux me présenter en 2 minutes</li>
-                    <li onclick="toggleCheck(this)">J'ai préparé les réponses aux questions</li>
-                    <li onclick="toggleCheck(this)">Je connais mes projets et technologies</li>
-                    <li onclick="toggleCheck(this)">J'ai des questions à poser</li>
-                    <li onclick="toggleCheck(this)">Ma caméra et microphone fonctionnent</li>
+                    <li onclick="toggleCheck(this)">I know the company and its mission</li>
+                    <li onclick="toggleCheck(this)">I can introduce myself in 2 minutes</li>
+                    <li onclick="toggleCheck(this)">I prepared answers to common questions</li>
+                    <li onclick="toggleCheck(this)">I know my projects and technologies</li>
+                    <li onclick="toggleCheck(this)">I have questions to ask the interviewer</li>
+                    <li onclick="toggleCheck(this)">My camera and microphone work</li>
+                    <li onclick="toggleCheck(this)">I have a quiet space for the call</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- TAB 3: SIMULATEUR -->
+        <div id="tab-simulator" class="tab-content">
+            <h2 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 0.8rem;">
+                🎙️ Mock Interview
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">
+                Simulez l'entretien avec Chris. Répondez en anglais.
+            </p>
+
+            <div class="card" style="text-align: center;">
+                <div class="avatar" id="avatar">👨‍💼</div>
+                <div id="status-badge" class="status-badge">Prêt à démarrer</div>
+                <div class="question-box" id="question-display">
+                    Cliquez sur "Démarrer l'entretien" pour que Chris vous pose la première question.
+                </div>
+                <div class="transcript-box" id="transcript-display">
+                    <i>Votre réponse en anglais s'affichera ici pendant que vous parlez...</i>
+                </div>
+                <button id="btn-main" class="btn btn-success" onclick="startOrNextQuestion()">
+                    ▶️ Démarrer l'entretien
+                </button>
+                <button id="btn-mic" class="btn btn-outline" onclick="toggleListening()" style="display: none;">
+                    🎙️ Parler / Répondre
+                </button>
+            </div>
+
+            <div class="card" style="text-align: center; background: #FEF3C7;">
+                <p style="font-weight: 600; color: #92400E;">
+                    🎯 WANT TO DO A MOCK INTERVIEW?
+                </p>
+                <p style="font-size: 0.9rem; color: #92400E;">
+                    I can simulate the interview and ask you questions in English. You answer, and I give you feedback.
+                </p>
+                <p style="font-size: 1rem; font-weight: 600; color: var(--accent); margin-top: 0.5rem;">
+                    Shall we practice together? 🚀
+                </p>
             </div>
         </div>
 
@@ -627,554 +623,134 @@
 
     <div class="toast" id="toast"></div>
 
-    <nav role="tablist">
-        <button class="nav-item active" onclick="switchTab('pronunciation', this)" role="tab">
-            <div>📚</div>Tous les mots
+    <nav>
+        <button class="nav-item active" onclick="switchTab('pronunciation', this)">
+            <div>🗣️</div>Prononciation
         </button>
-        <button class="nav-item" onclick="switchTab('quiz', this)" role="tab">
-            <div>✍️</div>Quiz
+        <button class="nav-item" onclick="switchTab('content', this)">
+            <div>📚</div>Contenu
         </button>
-        <button class="nav-item" onclick="switchTab('simulator', this)" role="tab">
+        <button class="nav-item" onclick="switchTab('simulator', this)">
             <div>🎙️</div>Entretien
         </button>
     </nav>
 
     <script>
         // ============================================================
-        // TOUS LES MOTS DE L'INTERVIEW AVEC PRONONCIATION EXACTE
+        // DONNÉES COMPLÈTES - TOUT LE CONTENU DE L'INTERVIEW
         // ============================================================
-        const allWords = [
-            // Mots de base
-            {
-                word: "Three",
-                phonetic: "/θriː/",
-                translation: "Trois",
-                syllables: ["THREE"],
-                category: "Nombres",
-                mouthGuide: "👅 Langue entre les dents pour le 'TH'"
-            },
-            {
-                word: "Dashboard",
-                phonetic: "/ˈdæʃ.bɔːrd/",
-                translation: "Tableau de bord",
-                syllables: ["DASH", "BOARD"],
-                category: "Outils",
-                mouthGuide: "👄 Ouvrez grand pour 'A' puis pincez pour 'SH'"
-            },
-            {
-                word: "Visualization",
-                phonetic: "/ˌvɪʒ.u.ə.laɪˈzeɪ.ʃən/",
-                translation: "Visualisation",
-                syllables: ["VIZ", "U", "A", "LI", "ZA", "SHUN"],
-                category: "Technique",
-                mouthGuide: "⚡ Dents sur lèvre inférieure pour 'V', gorge pour 'ZH'"
-            },
-            {
-                word: "Financial",
-                phonetic: "/faɪˈnæn.ʃəl/",
-                translation: "Financier",
-                syllables: ["FAI", "NAN", "SHUL"],
-                category: "Finance",
-                mouthGuide: "🎯 Dites 'FAI' comme 'aïe', pas 'Fi'"
-            },
-            {
-                word: "Profitability",
-                phonetic: "/ˌprɑː.fɪ.təˈbɪl.ə.ti/",
-                translation: "Rentabilité",
-                syllables: ["PRO", "FI", "TA", "BI", "LI", "TY"],
-                category: "Finance",
-                mouthGuide: "👄 Pincez pour 'P-R', relâchez pour 'O' court"
-            },
-            {
-                word: "Accountability",
-                phonetic: "/əˌkaʊn.təˈbɪl.ə.ti/",
-                translation: "Responsabilité",
-                syllables: ["A", "COUN", "TA", "BI", "LI", "TY"],
-                category: "Valeurs",
-                mouthGuide: "😮 Ouvrez sur 'COUN' (AW-OO), finissez rapidement"
-            },
-            {
-                word: "Autonomy",
-                phonetic: "/ɔːˈtɑː.nə.mi/",
-                translation: "Autonomie",
-                syllables: ["AU", "TO", "NO", "MY"],
-                category: "Valeurs",
-                mouthGuide: "🎯 'Au' comme 'eau', 'to' comme 'taux'"
-            },
-            {
-                word: "Cash flow",
-                phonetic: "/ˈkæʃ floʊ/",
-                translation: "Trésorerie",
-                syllables: ["CASH", "FLOW"],
-                category: "Finance",
-                mouthGuide: "💵 Pincez pour 'SH', 'FLOW' comme 'flo'"
-            },
-            {
-                word: "Mentorship",
-                phonetic: "/ˈmen.tɔːr.ʃɪp/",
-                translation: "Mentorat",
-                syllables: ["MEN", "TOR", "SHIP"],
-                category: "Valeurs",
-                mouthGuide: "🤝 'SHIP' comme 'chips' sans le 'C'"
-            },
-            {
-                word: "Data visualization",
-                phonetic: "/ˈdeɪ.tə ˌvɪʒ.u.ə.laɪˈzeɪ.ʃən/",
-                translation: "Visualisation de données",
-                syllables: ["DAY", "TA", "VIZ", "U", "A", "LI", "ZA", "SHUN"],
-                category: "Technique",
-                mouthGuide: "📊 'Day-ta' pas 'Da-ta'"
-            },
+
+        // --- TOUS LES MOTS AVEC PRONONCIATION ---
+        const vocabularyWords = [
+            // Mots clés
+            { word: "Dashboard", phonetic: "/ˈdæʃ.bɔːrd/", translation: "Tableau de bord", syllables: ["DASH", "BOARD"], guide: "👄 Ouvrez grand pour 'A' puis pincez pour 'SH'" },
+            { word: "Visualization", phonetic: "/ˌvɪʒ.u.ə.laɪˈzeɪ.ʃən/", translation: "Visualisation", syllables: ["VIZ", "U", "A", "LI", "ZA", "SHUN"], guide: "⚡ Dents sur lèvre inférieure pour 'V', gorge pour 'ZH'" },
+            { word: "Autonomy", phonetic: "/ɔːˈtɑː.nə.mi/", translation: "Autonomie", syllables: ["AU", "TO", "NO", "MY"], guide: "🎯 'Au' comme 'eau', 'to' comme 'taux'" },
+            { word: "Accountability", phonetic: "/əˌkaʊn.təˈbɪl.ə.ti/", translation: "Responsabilité", syllables: ["A", "COUN", "TA", "BI", "LI", "TY"], guide: "😮 Ouvrez sur 'COUN' (AW-OO), finissez rapidement" },
+            { word: "Financial", phonetic: "/faɪˈnæn.ʃəl/", translation: "Financier", syllables: ["FAI", "NAN", "SHUL"], guide: "🎯 Dites 'FAI' comme 'aïe', pas 'Fi'" },
+            { word: "Profitability", phonetic: "/ˌprɑː.fɪ.təˈbɪl.ə.ti/", translation: "Rentabilité", syllables: ["PRO", "FI", "TA", "BI", "LI", "TY"], guide: "👄 Pincez pour 'P-R', relâchez pour 'O' court" },
+            { word: "Cash flow", phonetic: "/ˈkæʃ floʊ/", translation: "Trésorerie", syllables: ["CASH", "FLOW"], guide: "💵 Pincez pour 'SH', 'FLOW' comme 'flo'" },
+            { word: "Mentorship", phonetic: "/ˈmen.tɔːr.ʃɪp/", translation: "Mentorat", syllables: ["MEN", "TOR", "SHIP"], guide: "🤝 'SHIP' comme 'chips' sans le 'C'" },
+            { word: "Data visualization", phonetic: "/ˈdeɪ.tə ˌvɪʒ.u.ə.laɪˈzeɪ.ʃən/", translation: "Visualisation de données", syllables: ["DAY", "TA", "VIZ", "U", "A", "LI", "ZA", "SHUN"], guide: "📊 'Day-ta' pas 'Da-ta'" },
             // Mots de la présentation
-            {
-                word: "Junior",
-                phonetic: "/ˈdʒuː.ni.ər/",
-                translation: "Junior",
-                syllables: ["JU", "NI", "ER"],
-                category: "Poste",
-                mouthGuide: "🎯 'Ju' comme 'djou', 'ni' comme 'ni'"
-            },
-            {
-                word: "Front-End",
-                phonetic: "/frʌnt ɛnd/",
-                translation: "Front-End",
-                syllables: ["FRONT", "END"],
-                category: "Technique",
-                mouthGuide: "👄 'Fr' comme 'frère', 'End' comme 'ande'"
-            },
-            {
-                word: "Developer",
-                phonetic: "/dɪˈvel.ə.pər/",
-                translation: "Développeur",
-                syllables: ["DE", "VEL", "O", "PER"],
-                category: "Poste",
-                mouthGuide: "⚡ 'De' court, 'vel' comme 'velle'"
-            },
-            {
-                word: "Passionate",
-                phonetic: "/ˈpæʃ.ən.ət/",
-                translation: "Passionné",
-                syllables: ["PASH", "UN", "UT"],
-                category: "Qualités",
-                mouthGuide: "🔥 'Pash' comme 'pache'"
-            },
-            {
-                word: "User-friendly",
-                phonetic: "/ˈjuː.zər ˈfrend.li/",
-                translation: "Convivial",
-                syllables: ["U", "ZER", "FREND", "LI"],
-                category: "Qualités",
-                mouthGuide: "👤 'U' comme 'you', 'zer' comme 'zeur'"
-            },
-            {
-                word: "Interface",
-                phonetic: "/ˈɪn.tər.feɪs/",
-                translation: "Interface",
-                syllables: ["IN", "TER", "FACE"],
-                category: "Technique",
-                mouthGuide: "💻 'In' comme 'inne', 'ter' comme 'teur'"
-            },
-            {
-                word: "Transaction",
-                phonetic: "/trænˈzæk.ʃən/",
-                translation: "Transaction",
-                syllables: ["TRAN", "ZAC", "SHUN"],
-                category: "Finance",
-                mouthGuide: "💳 'Tran' comme 'trane', 'zac' comme 'zack'"
-            },
-            {
-                word: "Interactive",
-                phonetic: "/ˌɪn.tərˈæk.tɪv/",
-                translation: "Interactif",
-                syllables: ["IN", "TER", "AC", "TIV"],
-                category: "Technique",
-                mouthGuide: "🔄 'In' + 'ter' + 'ac' + 'tiv'"
-            },
-            {
-                word: "Chart",
-                phonetic: "/tʃɑːrt/",
-                translation: "Graphique",
-                syllables: ["CHART"],
-                category: "Technique",
-                mouthGuide: "📊 'Tch' comme 'tchèque' + 'art'"
-            },
-            {
-                word: "Converter",
-                phonetic: "/kənˈvɜːr.tər/",
-                translation: "Convertisseur",
-                syllables: ["CON", "VER", "TER"],
-                category: "Technique",
-                mouthGuide: "🔄 'Con' comme 'conne', 'ver' comme 'vère'"
-            },
-            {
-                word: "Exchange rate",
-                phonetic: "/ɪksˈtʃeɪndʒ reɪt/",
-                translation: "Taux de change",
-                syllables: ["EX", "CHANGE", "RATE"],
-                category: "Finance",
-                mouthGuide: "💱 'Ex' + 'change' comme 'tchèndje'"
-            },
-            {
-                word: "API",
-                phonetic: "/ˌeɪ.piːˈaɪ/",
-                translation: "API",
-                syllables: ["A", "P", "I"],
-                category: "Technique",
-                mouthGuide: "🔌 'A-P-I' comme en français"
-            },
-            {
-                word: "Mission",
-                phonetic: "/ˈmɪʃ.ən/",
-                translation: "Mission",
-                syllables: ["MISH", "UN"],
-                category: "Valeurs",
-                mouthGuide: "🎯 'Mish' comme 'miche'"
-            },
-            {
-                word: "Business",
-                phonetic: "/ˈbɪz.nɪs/",
-                translation: "Affaires",
-                syllables: ["BIZ", "NIS"],
-                category: "Valeurs",
-                mouthGuide: "💼 'Biz' comme 'bize', 'nis' comme 'nisse'"
-            },
-            {
-                word: "Practical",
-                phonetic: "/ˈpræk.tɪ.kəl/",
-                translation: "Pratique",
-                syllables: ["PRAC", "TI", "CAL"],
-                category: "Qualités",
-                mouthGuide: "🛠️ 'Prac' comme 'prack', 'ti' comme 'ti'"
-            },
-            {
-                word: "Attention to detail",
-                phonetic: "/əˈten.ʃən tə ˈdiː.teɪl/",
-                translation: "Souci du détail",
-                syllables: ["A", "TEN", "SHUN", "TO", "DE", "TAIL"],
-                category: "Qualités",
-                mouthGuide: "🔍 'A' + 'ten' + 'shun' + 'to' + 'de' + 'tail'"
-            },
-            {
-                word: "Internal",
-                phonetic: "/ɪnˈtɜːr.nəl/",
-                translation: "Interne",
-                syllables: ["IN", "TER", "NAL"],
-                category: "Valeurs",
-                mouthGuide: "🏢 'In' + 'ter' + 'nal'"
-            },
-            {
-                word: "Remote",
-                phonetic: "/rɪˈmoʊt/",
-                translation: "À distance",
-                syllables: ["RE", "MOTE"],
-                category: "Valeurs",
-                mouthGuide: "🏠 'Re' comme 'reuh', 'mote' comme 'mote'"
-            },
-            {
-                word: "Mentor",
-                phonetic: "/ˈmen.tɔːr/",
-                translation: "Mentor",
-                syllables: ["MEN", "TOR"],
-                category: "Valeurs",
-                mouthGuide: "👨‍🏫 'Men' comme 'mène', 'tor' comme 'tore'"
-            },
-            // Mots des questions
-            {
-                word: "Strong",
-                phonetic: "/strɔːŋ/",
-                translation: "Fort",
-                syllables: ["STRONG"],
-                category: "Qualités",
-                mouthGuide: "💪 'Str' comme 'str' + 'ong'"
-            },
-            {
-                word: "Skill",
-                phonetic: "/skɪl/",
-                translation: "Compétence",
-                syllables: ["SKILL"],
-                category: "Qualités",
-                mouthGuide: "🎯 'S' + 'kill' comme 'kille'"
-            },
-            {
-                word: "Complete",
-                phonetic: "/kəmˈpliːt/",
-                translation: "Complet",
-                syllables: ["COM", "PLETE"],
-                category: "Qualités",
-                mouthGuide: "✅ 'Com' + 'plete' comme 'plète'"
-            },
-            {
-                word: "Personal",
-                phonetic: "/ˈpɜːr.sən.əl/",
-                translation: "Personnel",
-                syllables: ["PER", "SON", "AL"],
-                category: "Valeurs",
-                mouthGuide: "👤 'Per' comme 'peur', 'son' comme 'sonne'"
-            },
-            {
-                word: "Project",
-                phonetic: "/ˈprɒdʒ.ekt/",
-                translation: "Projet",
-                syllables: ["PRO", "JECT"],
-                category: "Valeurs",
-                mouthGuide: "📁 'Pro' comme 'pro', 'ject' comme 'djeckt'"
-            },
-            {
-                word: "Attract",
-                phonetic: "/əˈtrækt/",
-                translation: "Attirer",
-                syllables: ["A", "TRACT"],
-                category: "Valeurs",
-                mouthGuide: "🎯 'A' + 'tract' comme 'tracte'"
-            },
-            {
-                word: "Contribute",
-                phonetic: "/kənˈtrɪb.juːt/",
-                translation: "Contribuer",
-                syllables: ["CON", "TRI", "BUTE"],
-                category: "Valeurs",
-                mouthGuide: "🤝 'Con' + 'tri' + 'bute' comme 'bioute'"
-            },
-            {
-                word: "Available",
-                phonetic: "/əˈveɪ.lə.bəl/",
-                translation: "Disponible",
-                syllables: ["A", "VAI", "LA", "BLE"],
-                category: "Valeurs",
-                mouthGuide: "📅 'A' + 'vai' + 'la' + 'ble'"
-            },
-            {
-                word: "Eager",
-                phonetic: "/ˈiː.ɡər/",
-                translation: "Avide, impatient",
-                syllables: ["EA", "GER"],
-                category: "Qualités",
-                mouthGuide: "🌟 'Ea' comme 'i', 'ger' comme 'gueur'"
-            },
-            {
-                word: "Learn",
-                phonetic: "/lɜːrn/",
-                translation: "Apprendre",
-                syllables: ["LEARN"],
-                category: "Valeurs",
-                mouthGuide: "📚 'L' + 'earn' comme 'eurn'"
-            },
-            {
-                word: "Experience",
-                phonetic: "/ɪkˈspɪr.i.əns/",
-                translation: "Expérience",
-                syllables: ["EX", "PE", "RI", "ENCE"],
-                category: "Valeurs",
-                mouthGuide: "💼 'Ex' + 'pe' + 'ri' + 'ence'"
-            },
-            // Plus de mots techniques
-            {
-                word: "HTML",
-                phonetic: "/ˌeɪtʃ.tiː.emˈel/",
-                translation: "HTML",
-                syllables: ["H", "T", "M", "L"],
-                category: "Technique",
-                mouthGuide: "💻 'H-T-M-L' comme en français"
-            },
-            {
-                word: "CSS",
-                phonetic: "/ˌsiː.esˈes/",
-                translation: "CSS",
-                syllables: ["C", "S", "S"],
-                category: "Technique",
-                mouthGuide: "🎨 'C-S-S' comme en français"
-            },
-            {
-                word: "JavaScript",
-                phonetic: "/ˈdʒɑː.və.skrɪpt/",
-                translation: "JavaScript",
-                syllables: ["JA", "VA", "SCRIPT"],
-                category: "Technique",
-                mouthGuide: "⚡ 'Ja' + 'va' + 'script'"
-            },
-            {
-                word: "Git",
-                phonetic: "/ɡɪt/",
-                translation: "Git",
-                syllables: ["GIT"],
-                category: "Technique",
-                mouthGuide: "📝 'Git' comme 'guite'"
-            },
-            {
-                word: "Chart.js",
-                phonetic: "/tʃɑːrt dʒeɪ es/",
-                translation: "Chart.js",
-                syllables: ["CHART", "J", "S"],
-                category: "Technique",
-                mouthGuide: "📊 'Chart' + 'J' + 'S'"
-            },
-            {
-                word: "REST API",
-                phonetic: "/rest ˈeɪ.piːˈaɪ/",
-                translation: "API REST",
-                syllables: ["REST", "A", "P", "I"],
-                category: "Technique",
-                mouthGuide: "🔌 'REST' + 'A-P-I'"
-            },
-            {
-                word: "VS Code",
-                phonetic: "/viː es koʊd/",
-                translation: "VS Code",
-                syllables: ["V", "S", "CODE"],
-                category: "Technique",
-                mouthGuide: "💻 'V-S' + 'Code'"
-            },
-            {
-                word: "Chrome DevTools",
-                phonetic: "/kroʊm ˈdev.tuːlz/",
-                translation: "Outils développeur",
-                syllables: ["CHROME", "DEV", "TOOLS"],
-                category: "Technique",
-                mouthGuide: "🔧 'Chrome' + 'Dev' + 'Tools'"
-            },
-            {
-                word: "KPI Dashboard",
-                phonetic: "/ˌkeɪ.piːˈaɪ ˈdæʃ.bɔːrd/",
-                translation: "Tableau de bord KPI",
-                syllables: ["K", "P", "I", "DASH", "BOARD"],
-                category: "Finance",
-                mouthGuide: "📊 'K-P-I' + 'Dashboard'"
-            },
-            {
-                word: "Actionable",
-                phonetic: "/ˈæk.ʃən.ə.bəl/",
-                translation: "Actionnable",
-                syllables: ["AC", "TION", "A", "BLE"],
-                category: "Finance",
-                mouthGuide: "🎯 'Ac' + 'tion' + 'a' + 'ble'"
-            },
-            {
-                word: "Insight",
-                phonetic: "/ˈɪn.saɪt/",
-                translation: "Perspicacité",
-                syllables: ["IN", "SIGHT"],
-                category: "Finance",
-                mouthGuide: "💡 'In' + 'sight' comme 'saïte'"
-            },
-            {
-                word: "Rigor",
-                phonetic: "/ˈrɪɡ.ər/",
-                translation: "Rigueur",
-                syllables: ["RI", "GOR"],
-                category: "Qualités",
-                mouthGuide: "📐 'Ri' + 'gor' comme 'gore'"
-            },
-            {
-                word: "Curiosity",
-                phonetic: "/ˌkjʊr.iˈɑː.sə.ti/",
-                translation: "Curiosité",
-                syllables: ["CU", "RI", "O", "SI", "TY"],
-                category: "Qualités",
-                mouthGuide: "🔍 'Cu' + 'ri' + 'o' + 'si' + 'ty'"
-            },
-            {
-                word: "Disciplined",
-                phonetic: "/ˈdɪs.ə.plɪnd/",
-                translation: "Discipliné",
-                syllables: ["DIS", "CI", "PLINED"],
-                category: "Qualités",
-                mouthGuide: "📋 'Dis' + 'ci' + 'plined'"
-            },
-            {
-                word: "Organized",
-                phonetic: "/ˈɔːr.ɡə.naɪzd/",
-                translation: "Organisé",
-                syllables: ["OR", "GA", "NIZED"],
-                category: "Qualités",
-                mouthGuide: "📁 'Or' + 'ga' + 'nized'"
-            },
-            {
-                word: "Feedback",
-                phonetic: "/ˈfiːd.bæk/",
-                translation: "Retour d'information",
-                syllables: ["FEED", "BACK"],
-                category: "Valeurs",
-                mouthGuide: "🔄 'Feed' + 'back'"
-            },
-            {
-                word: "Growth",
-                phonetic: "/ɡroʊθ/",
-                translation: "Croissance",
-                syllables: ["GROWTH"],
-                category: "Valeurs",
-                mouthGuide: "📈 'Grow' + 'th'"
-            },
-            {
-                word: "Challenge",
-                phonetic: "/ˈtʃæl.ɪndʒ/",
-                translation: "Défi",
-                syllables: ["CHAL", "LENGE"],
-                category: "Valeurs",
-                mouthGuide: "🎯 'Chal' + 'lenge' comme 'lèndje'"
-            }
+            { word: "Junior", phonetic: "/ˈdʒuː.ni.ər/", translation: "Junior", syllables: ["JU", "NI", "ER"], guide: "🎯 'Ju' comme 'djou'" },
+            { word: "Front-End", phonetic: "/frʌnt ɛnd/", translation: "Front-End", syllables: ["FRONT", "END"], guide: "👄 'Fr' comme 'frère'" },
+            { word: "Developer", phonetic: "/dɪˈvel.ə.pər/", translation: "Développeur", syllables: ["DE", "VEL", "O", "PER"], guide: "⚡ 'De' court, 'vel' comme 'velle'" },
+            { word: "Passionate", phonetic: "/ˈpæʃ.ən.ət/", translation: "Passionné", syllables: ["PASH", "UN", "UT"], guide: "🔥 'Pash' comme 'pache'" },
+            { word: "User-friendly", phonetic: "/ˈjuː.zər ˈfrend.li/", translation: "Convivial", syllables: ["U", "ZER", "FREND", "LI"], guide: "👤 'U' comme 'you'" },
+            { word: "Interface", phonetic: "/ˈɪn.tər.feɪs/", translation: "Interface", syllables: ["IN", "TER", "FACE"], guide: "💻 'In' + 'ter' + 'face'" },
+            { word: "Transaction", phonetic: "/trænˈzæk.ʃən/", translation: "Transaction", syllables: ["TRAN", "ZAC", "SHUN"], guide: "💳 'Tran' comme 'trane'" },
+            { word: "Interactive", phonetic: "/ˌɪn.tərˈæk.tɪv/", translation: "Interactif", syllables: ["IN", "TER", "AC", "TIV"], guide: "🔄 'In' + 'ter' + 'ac' + 'tiv'" },
+            { word: "Chart", phonetic: "/tʃɑːrt/", translation: "Graphique", syllables: ["CHART"], guide: "📊 'Tch' comme 'tchèque' + 'art'" },
+            { word: "Converter", phonetic: "/kənˈvɜːr.tər/", translation: "Convertisseur", syllables: ["CON", "VER", "TER"], guide: "🔄 'Con' + 'ver' + 'ter'" },
+            { word: "Exchange rate", phonetic: "/ɪksˈtʃeɪndʒ reɪt/", translation: "Taux de change", syllables: ["EX", "CHANGE", "RATE"], guide: "💱 'Ex' + 'change' comme 'tchèndje'" },
+            { word: "API", phonetic: "/ˌeɪ.piːˈaɪ/", translation: "API", syllables: ["A", "P", "I"], guide: "🔌 'A-P-I' comme en français" },
+            { word: "Mission", phonetic: "/ˈmɪʃ.ən/", translation: "Mission", syllables: ["MISH", "UN"], guide: "🎯 'Mish' comme 'miche'" },
+            { word: "Business", phonetic: "/ˈbɪz.nɪs/", translation: "Affaires", syllables: ["BIZ", "NIS"], guide: "💼 'Biz' + 'nis'" },
+            { word: "Practical", phonetic: "/ˈpræk.tɪ.kəl/", translation: "Pratique", syllables: ["PRAC", "TI", "CAL"], guide: "🛠️ 'Prac' comme 'prack'" },
+            { word: "Internal", phonetic: "/ɪnˈtɜːr.nəl/", translation: "Interne", syllables: ["IN", "TER", "NAL"], guide: "🏢 'In' + 'ter' + 'nal'" },
+            { word: "Remote", phonetic: "/rɪˈmoʊt/", translation: "À distance", syllables: ["RE", "MOTE"], guide: "🏠 'Re' + 'mote'" },
+            { word: "Mentor", phonetic: "/ˈmen.tɔːr/", translation: "Mentor", syllables: ["MEN", "TOR"], guide: "👨‍🏫 'Men' + 'tor'" },
+            { word: "Skill", phonetic: "/skɪl/", translation: "Compétence", syllables: ["SKILL"], guide: "🎯 'S' + 'kill'" },
+            { word: "Complete", phonetic: "/kəmˈpliːt/", translation: "Complet", syllables: ["COM", "PLETE"], guide: "✅ 'Com' + 'plete'" },
+            { word: "Personal", phonetic: "/ˈpɜːr.sən.əl/", translation: "Personnel", syllables: ["PER", "SON", "AL"], guide: "👤 'Per' + 'son' + 'al'" },
+            { word: "Project", phonetic: "/ˈprɒdʒ.ekt/", translation: "Projet", syllables: ["PRO", "JECT"], guide: "📁 'Pro' + 'ject'" },
+            { word: "Attract", phonetic: "/əˈtrækt/", translation: "Attirer", syllables: ["A", "TRACT"], guide: "🎯 'A' + 'tract'" },
+            { word: "Contribute", phonetic: "/kənˈtrɪb.juːt/", translation: "Contribuer", syllables: ["CON", "TRI", "BUTE"], guide: "🤝 'Con' + 'tri' + 'bute'" },
+            { word: "Available", phonetic: "/əˈveɪ.lə.bəl/", translation: "Disponible", syllables: ["A", "VAI", "LA", "BLE"], guide: "📅 'A' + 'vai' + 'la' + 'ble'" },
+            { word: "Eager", phonetic: "/ˈiː.ɡər/", translation: "Avide", syllables: ["EA", "GER"], guide: "🌟 'Ea' comme 'i'" },
+            { word: "Learn", phonetic: "/lɜːrn/", translation: "Apprendre", syllables: ["LEARN"], guide: "📚 'L' + 'earn'" },
+            { word: "Experience", phonetic: "/ɪkˈspɪr.i.əns/", translation: "Expérience", syllables: ["EX", "PE", "RI", "ENCE"], guide: "💼 'Ex' + 'pe' + 'ri' + 'ence'" },
+            { word: "HTML", phonetic: "/ˌeɪtʃ.tiː.emˈel/", translation: "HTML", syllables: ["H", "T", "M", "L"], guide: "💻 'H-T-M-L'" },
+            { word: "CSS", phonetic: "/ˌsiː.esˈes/", translation: "CSS", syllables: ["C", "S", "S"], guide: "🎨 'C-S-S'" },
+            { word: "JavaScript", phonetic: "/ˈdʒɑː.və.skrɪpt/", translation: "JavaScript", syllables: ["JA", "VA", "SCRIPT"], guide: "⚡ 'Ja' + 'va' + 'script'" },
+            { word: "Git", phonetic: "/ɡɪt/", translation: "Git", syllables: ["GIT"], guide: "📝 'Git' comme 'guite'" },
+            { word: "REST API", phonetic: "/rest ˈeɪ.piːˈaɪ/", translation: "API REST", syllables: ["REST", "A", "P", "I"], guide: "🔌 'REST' + 'A-P-I'" },
+            { word: "KPI", phonetic: "/ˌkeɪ.piːˈaɪ/", translation: "KPI", syllables: ["K", "P", "I"], guide: "📊 'K-P-I'" },
+            { word: "Actionable", phonetic: "/ˈæk.ʃən.ə.bəl/", translation: "Actionnable", syllables: ["AC", "TION", "A", "BLE"], guide: "🎯 'Ac' + 'tion' + 'a' + 'ble'" },
+            { word: "Insight", phonetic: "/ˈɪn.saɪt/", translation: "Perspicacité", syllables: ["IN", "SIGHT"], guide: "💡 'In' + 'sight'" },
+            { word: "Rigor", phonetic: "/ˈrɪɡ.ər/", translation: "Rigueur", syllables: ["RI", "GOR"], guide: "📐 'Ri' + 'gor'" },
+            { word: "Curiosity", phonetic: "/ˌkjʊr.iˈɑː.sə.ti/", translation: "Curiosité", syllables: ["CU", "RI", "O", "SI", "TY"], guide: "🔍 'Cu' + 'ri' + 'o' + 'si' + 'ty'" },
+            { word: "Disciplined", phonetic: "/ˈdɪs.ə.plɪnd/", translation: "Discipliné", syllables: ["DIS", "CI", "PLINED"], guide: "📋 'Dis' + 'ci' + 'plined'" },
+            { word: "Organized", phonetic: "/ˈɔːr.ɡə.naɪzd/", translation: "Organisé", syllables: ["OR", "GA", "NIZED"], guide: "📁 'Or' + 'ga' + 'nized'" },
+            { word: "Feedback", phonetic: "/ˈfiːd.bæk/", translation: "Retour", syllables: ["FEED", "BACK"], guide: "🔄 'Feed' + 'back'" },
+            { word: "Growth", phonetic: "/ɡroʊθ/", translation: "Croissance", syllables: ["GROWTH"], guide: "📈 'Grow' + 'th'" },
+            { word: "Challenge", phonetic: "/ˈtʃæl.ɪndʒ/", translation: "Défi", syllables: ["CHAL", "LENGE"], guide: "🎯 'Chal' + 'lenge'" }
+        ];
+
+        // --- QUESTIONS GÉNÉRALES ---
+        const generalQuestions = [
+            { q: "Tell me about yourself.", a: "I'm a Junior Web Developer passionate about building responsive interfaces and visualizing data. I learned through self-study and my university program. I've completed two projects that are live online. I'm detail-oriented, self-motivated, and I enjoy understanding the numbers behind decisions." },
+            { q: "Why Blue Oak Consulting?", a: "I was drawn to your practical approach to financial consulting. You don't just write reports — you help businesses achieve real financial clarity. Your KPI Dashboard caught my attention because it's exactly the type of tool I want to build: interfaces that turn complex data into actionable insights." },
+            { q: "Why do you want to work remotely?", a: "Remote work allows me to be focused and productive. I'm disciplined, organized, and I communicate regularly with my teams. I've already worked autonomously on my personal projects and I'm comfortable with collaboration tools like Slack and Zoom." },
+            { q: "What are your strengths?", a: "My technical rigor — I write clean code and test it carefully. My curiosity — I love understanding the data behind the interfaces. And my autonomy — I can manage my time and deliver results without constant supervision." },
+            { q: "What are your weaknesses?", a: "I'm still at the beginning of my professional career, so I don't have corporate experience yet. But I'm very motivated to learn and be mentored. My personal projects show that I'm capable of learning quickly on my own." },
+            { q: "Where do you see yourself in 5 years?", a: "I see myself as a skilled web developer capable of handling complex data visualization projects. I'd like to master a framework like React or Vue.js and continue growing in the financial consulting space, combining technical skills with business understanding." },
+            { q: "What do you know about our company?", a: "Blue Oak Consulting specializes in financial advisory for industrial SMEs. You offer fractional CFO services, cash flow analysis, and profitability improvement. You're based in Denton, Texas, but work with clients across North America. Your founder, Chris Thomas, has over 28 years of experience in finance." }
+        ];
+
+        // --- QUESTIONS TECHNIQUES ---
+        const technicalQuestions = [
+            { q: "What technologies do you master?", a: "I have strong skills in HTML5, CSS3, JavaScript (ES6+), Chart.js for data visualization, Git for version control, and basic knowledge of REST APIs. I'm also comfortable with VS Code and Chrome DevTools." },
+            { q: "Explain your financial dashboard project.", a: "It's a web application for managing financial transactions. Users can add transactions, and the app automatically calculates totals, sales, expenses, and displays charts. Features include filters, search, export to CSV/PDF, dark/light theme, and local storage for data persistence." },
+            { q: "How do you handle errors in JavaScript?", a: "I use try...catch blocks to capture errors, validate user inputs (e.g., checking that amounts are valid numbers), and display clear error messages using toast notifications." },
+            { q: "What's the difference between == and === in JavaScript?", a: "== compares values after type conversion (e.g., 1 == '1' is true). === compares both value and type (e.g., 1 === '1' is false). I prefer using === because it's more precise and prevents bugs." },
+            { q: "How does Git work?", a: "Git tracks code changes. I make regular commits with clear messages, create branches for new features, and merge back to the main branch. All my projects are on GitHub." },
+            { q: "Have you worked with APIs?", a: "Yes, in my multi-unit converter project, I use the ExchangeRate-API to get live currency rates. I learned to make fetch requests, handle promises, and process JSON data." },
+            { q: "How do you ensure your code is clean?", a: "I use consistent naming conventions, write comments for complex logic, keep functions small and focused, and test my code regularly. I also use Git to track changes and organize my work." }
+        ];
+
+        // --- QUESTIONS COMPORTEMENTALES ---
+        const behavioralQuestions = [
+            { q: "How do you handle stress?", a: "I take a step back, breathe, and prioritize tasks. I break down complex problems into small steps. Prayer and meditation help me stay calm and focused." },
+            { q: "Do you work well in a team?", a: "Yes, I enjoy collaborating and exchanging ideas. Even remotely, I'm available for meetings, screen sharing, and discussions. I listen to feedback and learn from others." },
+            { q: "How do you handle criticism?", a: "I see feedback as a learning opportunity. I don't take it personally — I try to understand and improve. It's the best way to grow professionally." },
+            { q: "Tell me about a challenging project.", a: "My financial dashboard was challenging because I had to manage multiple features: calculations, charts, filters, and exports. I organized my code step by step and delivered a complete working project." },
+            { q: "How do you learn a new technology?", a: "I start with the official documentation, watch tutorials, and practice by building small projects. If I get stuck, I search on Stack Overflow or ask in developer communities." },
+            { q: "Why should we hire you?", a: "I'm motivated, detail-oriented, and I've already demonstrated my ability to deliver complete projects independently. I understand your mission and I know my data visualization skills can contribute to your tools. I'm ready to learn and be mentored." }
+        ];
+
+        // --- QUESTIONS À POSER ---
+        const questionsToAsk = [
+            "What would be my first projects if I'm hired?",
+            "How does the mentorship work at Blue Oak Consulting?",
+            "What technologies does the team use daily?",
+            "How does the team collaborate remotely?",
+            "What are the biggest challenges the company is facing right now?"
+        ];
+
+        // --- TOUTES LES QUESTIONS POUR LE SIMULATEUR ---
+        const allInterviewQuestions = [
+            ...generalQuestions,
+            ...technicalQuestions,
+            ...behavioralQuestions
         ];
 
         // ============================================================
-        // QUESTIONS DE L'ENTRETIEN
+        // FONCTIONS
         // ============================================================
-        const interviewQuestions = [
-            {
-                question: "Tell me about yourself.",
-                answer: "I'm a Junior Web Developer passionate about building responsive interfaces and visualizing data. I learned through self-study and my university program. I've completed two projects that are live online. I'm detail-oriented, self-motivated, and I enjoy understanding the numbers behind decisions."
-            },
-            {
-                question: "Why Blue Oak Consulting?",
-                answer: "I was drawn to your practical approach to financial consulting. You don't just write reports — you help businesses achieve real financial clarity. Your KPI Dashboard caught my attention because it's exactly the type of tool I want to build: interfaces that turn complex data into actionable insights."
-            },
-            {
-                question: "What technologies do you master?",
-                answer: "I have strong skills in HTML5, CSS3, JavaScript (ES6+), Chart.js for data visualization, Git for version control, and basic knowledge of REST APIs."
-            },
-            {
-                question: "Explain your financial dashboard project.",
-                answer: "It's a web application for managing financial transactions. Users can add transactions, and the app automatically calculates totals, sales, expenses, and displays charts. Features include filters, search, export to CSV/PDF, dark/light theme, and local storage."
-            },
-            {
-                question: "What's the difference between double equals and triple equals in JavaScript?",
-                answer: "Double equals compares values after type conversion. Triple equals compares both value and type. I prefer using triple equals because it's more precise and prevents bugs."
-            },
-            {
-                question: "How do you handle working remotely?",
-                answer: "Remote work allows me to be focused and productive. I'm disciplined, organized, and I communicate regularly with my teams. I'm comfortable with Slack and Zoom."
-            },
-            {
-                question: "What are your strengths?",
-                answer: "My technical rigor, my curiosity, and my autonomy. I write clean code, I love understanding data, and I can manage my time without constant supervision."
-            },
-            {
-                question: "What are your weaknesses?",
-                answer: "I'm still at the beginning of my professional career, so I don't have corporate experience yet. But I'm very motivated to learn and be mentored."
-            },
-            {
-                question: "Where do you see yourself in 5 years?",
-                answer: "I see myself as a skilled web developer capable of handling complex data visualization projects. I'd like to master React or Vue.js and continue growing in financial consulting."
-            },
-            {
-                question: "Why should we hire you?",
-                answer: "I'm motivated, detail-oriented, and I've already demonstrated my ability to deliver complete projects independently. I understand your mission and I know my data visualization skills can contribute to your tools."
-            }
-        ];
 
-        // ============================================================
-        // ÉTAT DE L'APPLICATION
-        // ============================================================
-        const state = {
-            currentQuizIndex: 0,
-            score: 0,
-            quizAttempts: 0,
-            currentInterviewIndex: -1,
-            isListening: false,
-            recognition: null
-        };
-
-        // ============================================================
-        // FONCTIONS AUDIO
-        // ============================================================
+        // --- AUDIO ---
         function playAudio(text, speed) {
             try {
                 if ('speechSynthesis' in window) {
@@ -1186,181 +762,131 @@
                 } else {
                     showToast("❌ Synthèse vocale non supportée");
                 }
-            } catch (error) {
-                console.error('Erreur audio:', error);
-                showToast("❌ Erreur lecture audio");
+            } catch (e) {
+                showToast("❌ Erreur audio");
             }
         }
 
-        function playSyllables(syllablesArray) {
+        function playSyllables(syllables) {
             try {
-                if (!('speechSynthesis' in window)) {
-                    showToast("❌ Synthèse vocale non supportée");
-                    return;
-                }
+                if (!('speechSynthesis' in window)) return;
                 window.speechSynthesis.cancel();
-                syllablesArray.forEach((syllable, index) => {
+                syllables.forEach((syl, i) => {
                     setTimeout(() => {
-                        const utterance = new SpeechSynthesisUtterance(syllable);
-                        utterance.lang = 'en-US';
-                        utterance.rate = 0.6;
-                        window.speechSynthesis.speak(utterance);
-                    }, index * 900);
+                        const u = new SpeechSynthesisUtterance(syl);
+                        u.lang = 'en-US';
+                        u.rate = 0.6;
+                        window.speechSynthesis.speak(u);
+                    }, i * 900);
                 });
-            } catch (error) {
-                console.error('Erreur syllabes:', error);
-                showToast("❌ Erreur lecture syllabes");
+            } catch (e) {
+                showToast("❌ Erreur syllabes");
             }
         }
 
-        function playFullPresentation() {
-            const text = document.getElementById('presentationText').textContent;
-            playAudio(text, 0.8);
-        }
-
-        // ============================================================
-        // RENDU DES MOTS AVEC RECHERCHE
-        // ============================================================
-        function renderAllWords(filter = '') {
-            const container = document.getElementById('pronunciation-cards-container');
+        // --- RENDU DES MOTS ---
+        function renderWords(filter = '') {
+            const container = document.getElementById('words-container');
             container.innerHTML = '';
-            
-            const filtered = allWords.filter(item => 
-                item.word.toLowerCase().includes(filter.toLowerCase()) ||
-                item.translation.toLowerCase().includes(filter.toLowerCase()) ||
-                item.category.toLowerCase().includes(filter.toLowerCase())
+            const filtered = vocabularyWords.filter(w =>
+                w.word.toLowerCase().includes(filter.toLowerCase()) ||
+                w.translation.toLowerCase().includes(filter.toLowerCase())
             );
+            document.getElementById('wordCount').textContent = `${filtered.length} mots sur ${vocabularyWords.length}`;
 
-            document.getElementById('wordCount').textContent = `Affichage de ${filtered.length} mots sur ${allWords.length}`;
-
-            filtered.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="word-title">
-                        <span>${item.word}</span>
-                        <span class="category-tag">${item.category}</span>
-                    </div>
-                    <div class="word-phonetic">${item.phonetic}</div>
-                    <div class="word-translation">Traduction : ${item.translation}</div>
-                    <div class="syllables-badge">🧩 Syllabes : ${item.syllables.join(' - ')}</div>
-                    <div class="mouth-instruction">${item.mouthGuide}</div>
+            filtered.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.innerHTML = `
+                    <div style="font-size:1.2rem;font-weight:bold;color:var(--primary);">${item.word}</div>
+                    <div class="phonetic">${item.phonetic}</div>
+                    <div class="translation">${item.translation}</div>
+                    <div class="syllables">🧩 ${item.syllables.join(' - ')}</div>
+                    <div class="mouth-guide">${item.guide}</div>
                     <div class="audio-group">
-                        <button class="btn-audio" onclick="playAudio('${item.word}', 1.0)">🔊 Normal</button>
-                        <button class="btn-audio" onclick="playAudio('${item.word}', 0.4)">🐢 Lent</button>
+                        <button class="btn-audio" onclick="playAudio('${item.word}',1.0)">🔊 Normal</button>
+                        <button class="btn-audio" onclick="playAudio('${item.word}',0.4)">🐢 Lent</button>
                         <button class="btn-audio" onclick='playSyllables(${JSON.stringify(item.syllables)})'>🧩 Syllabes</button>
                     </div>
                 `;
-                container.appendChild(card);
+                container.appendChild(div);
             });
-
-            updateProgress();
         }
 
         function filterWords() {
-            const search = document.getElementById('searchWords').value;
-            renderAllWords(search);
+            renderWords(document.getElementById('searchWords').value);
         }
 
-        // ============================================================
-        // QUIZ
-        // ============================================================
-        let quizWords = [];
-
-        function initQuiz() {
-            // Utiliser tous les mots pour le quiz
-            quizWords = allWords.map(w => w.word);
-            document.getElementById('total-questions').textContent = quizWords.length;
-            loadQuizQuestion();
+        // --- RENDU DES QUESTIONS ---
+        function renderQuestions(containerId, questions) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            questions.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'question-item';
+                div.innerHTML = `
+                    <strong>Q${i+1}: ${item.q}</strong>
+                    <div class="answer">${item.a}</div>
+                    <button class="btn btn-outline" style="margin-top:0.5rem;padding:0.3rem;font-size:0.8rem;" onclick="playAudio('${item.a}',0.8)">🔊 Écouter la réponse</button>
+                `;
+                container.appendChild(div);
+            });
         }
 
-        function loadQuizQuestion() {
-            if (state.currentQuizIndex >= quizWords.length) {
-                state.currentQuizIndex = 0;
-            }
-            const word = allWords.find(w => w.word === quizWords[state.currentQuizIndex]);
-            if (word) {
-                document.getElementById('quiz-hint-text').textContent = `Traduction : "${word.translation}" (${word.syllables.length} syllabe(s))`;
-                document.getElementById('quiz-input').value = '';
-                const feedback = document.getElementById('quiz-feedback');
-                feedback.className = 'quiz-feedback';
-                feedback.style.display = 'none';
-                document.getElementById('btn-next-quiz').style.display = 'none';
-                state.quizAttempts = 0;
-                updateProgress();
-            }
+        // --- RENDU DES QUESTIONS À POSER ---
+        function renderQuestionsToAsk() {
+            const container = document.getElementById('questions-to-ask');
+            container.innerHTML = '';
+            questionsToAsk.forEach(q => {
+                const div = document.createElement('div');
+                div.className = 'question-to-ask';
+                div.textContent = q;
+                container.appendChild(div);
+            });
         }
 
-        function playQuizAudio(speed) {
-            const word = allWords.find(w => w.word === quizWords[state.currentQuizIndex]);
-            if (word) playAudio(word.word, speed);
+        // --- CHECKLIST ---
+        function toggleCheck(el) {
+            el.classList.toggle('checked');
         }
 
-        function playQuizSyllables() {
-            const word = allWords.find(w => w.word === quizWords[state.currentQuizIndex]);
-            if (word) playSyllables(word.syllables);
+        // --- TOAST ---
+        function showToast(msg, duration = 3000) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.remove('show'), duration);
         }
 
-        function checkQuizAnswer() {
-            const userInput = document.getElementById('quiz-input').value.trim().toLowerCase();
-            const expectedWord = quizWords[state.currentQuizIndex].toLowerCase();
-            const feedback = document.getElementById('quiz-feedback');
+        // --- SIMULATEUR ---
+        const simState = {
+            index: -1,
+            listening: false,
+            recognition: null
+        };
 
-            if (userInput === expectedWord) {
-                feedback.textContent = "🎉 Bravo !";
-                feedback.className = "quiz-feedback correct";
-                document.getElementById('btn-next-quiz').style.display = "block";
-                if (state.quizAttempts === 0) {
-                    state.score++;
-                    document.getElementById('score-value').textContent = state.score;
-                    showToast("🎉 +1 point !");
-                }
-            } else {
-                state.quizAttempts++;
-                if (state.quizAttempts < 3) {
-                    feedback.textContent = `❌ Essayez encore (${3 - state.quizAttempts} essai(s) restant(s))`;
-                } else {
-                    feedback.textContent = `❌ La réponse était : "${quizWords[state.currentQuizIndex]}"`;
-                    document.getElementById('btn-next-quiz').style.display = "block";
-                }
-                feedback.className = "quiz-feedback wrong";
-            }
-            feedback.style.display = 'block';
-        }
-
-        function nextQuizQuestion() {
-            state.currentQuizIndex = (state.currentQuizIndex + 1) % quizWords.length;
-            loadQuizQuestion();
-        }
-
-        // ============================================================
-        // SIMULATEUR
-        // ============================================================
-        function initSpeechRecognition() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
+        function initRecognition() {
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) {
                 showToast("❌ Reconnaissance vocale non supportée");
                 return null;
             }
-            const recognition = new SpeechRecognition();
-            recognition.continuous = true;
-            recognition.lang = 'en-US';
-            recognition.interimResults = true;
-            recognition.onresult = (event) => {
-                let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    transcript += event.results[i][0].transcript;
+            const r = new SR();
+            r.continuous = true;
+            r.lang = 'en-US';
+            r.interimResults = true;
+            r.onresult = (e) => {
+                let t = '';
+                for (let i = e.resultIndex; i < e.results.length; i++) {
+                    t += e.results[i][0].transcript;
                 }
-                document.getElementById('transcript-display').textContent = transcript;
+                document.getElementById('transcript-display').textContent = t;
             };
-            recognition.onerror = (event) => {
-                console.error('Erreur:', event.error);
-                if (event.error === 'not-allowed') {
-                    showToast("❌ Veuillez autoriser le microphone");
-                }
-                if (state.isListening) toggleListening();
+            r.onerror = () => {
+                if (simState.listening) toggleListening();
             };
-            return recognition;
+            return r;
         }
 
         function setStatus(text, type) {
@@ -1371,145 +897,102 @@
             avatar.classList.toggle('speaking', type === 'speaking');
         }
 
-        function speakQuestion(text, onEndCallback) {
+        function speakQuestion(text, cb) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.85;
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US';
+                u.rate = 0.85;
                 setStatus("Chris pose la question...", "speaking");
-                utterance.onend = () => {
+                u.onend = () => {
                     setStatus("À votre tour !", "listening");
-                    if (onEndCallback) onEndCallback();
+                    if (cb) cb();
                 };
-                window.speechSynthesis.speak(utterance);
+                window.speechSynthesis.speak(u);
             }
         }
 
         function startOrNextQuestion() {
-            state.currentInterviewIndex++;
-            if (state.currentInterviewIndex >= interviewQuestions.length) {
-                state.currentInterviewIndex = 0;
+            simState.index++;
+            if (simState.index >= allInterviewQuestions.length) {
+                simState.index = 0;
                 showToast("🔄 Retour à la première question");
             }
-            const q = interviewQuestions[state.currentInterviewIndex];
-            document.getElementById('question-display').textContent = `"${q.question}"`;
+            const q = allInterviewQuestions[simState.index];
+            document.getElementById('question-display').textContent = `"${q.q}"`;
             document.getElementById('transcript-display').innerHTML = `<i>Votre réponse s'affichera ici...</i>`;
-            
-            const mainBtn = document.getElementById('btn-main');
-            mainBtn.textContent = "⏭️ Question suivante";
-            mainBtn.className = "btn btn-outline";
+            document.getElementById('btn-main').textContent = "⏭️ Question suivante";
+            document.getElementById('btn-main').className = "btn btn-outline";
             document.getElementById('btn-mic').style.display = "flex";
-            
-            if (state.recognition && state.isListening) toggleListening();
-            speakQuestion(q.question, () => setTimeout(autoStartListening, 500));
+            if (simState.recognition && simState.listening) toggleListening();
+            speakQuestion(q.q, () => setTimeout(autoStartListening, 500));
         }
 
         function autoStartListening() {
-            if (!state.recognition) {
-                state.recognition = initSpeechRecognition();
-                if (!state.recognition) return;
+            if (!simState.recognition) {
+                simState.recognition = initRecognition();
+                if (!simState.recognition) return;
             }
-            if (!state.isListening) {
+            if (!simState.listening) {
                 try {
-                    state.isListening = true;
-                    state.recognition.start();
+                    simState.listening = true;
+                    simState.recognition.start();
                     document.getElementById('btn-mic').textContent = "🛑 Arrêter le micro";
                     document.getElementById('btn-mic').className = "btn btn-danger";
                     setStatus("À votre tour !", "listening");
-                } catch(e) {
-                    console.error('Erreur micro:', e);
-                }
+                } catch(e) {}
             }
         }
 
         function toggleListening() {
-            if (!state.recognition) {
-                state.recognition = initSpeechRecognition();
-                if (!state.recognition) return;
+            if (!simState.recognition) {
+                simState.recognition = initRecognition();
+                if (!simState.recognition) return;
             }
-            const micBtn = document.getElementById('btn-mic');
-            if (state.isListening) {
-                state.isListening = false;
-                state.recognition.stop();
+            const btn = document.getElementById('btn-mic');
+            if (simState.listening) {
+                simState.listening = false;
+                simState.recognition.stop();
                 setStatus("Micro en pause", "");
-                micBtn.textContent = "🎙️ Parler / Répondre";
-                micBtn.className = "btn btn-outline";
+                btn.textContent = "🎙️ Parler / Répondre";
+                btn.className = "btn btn-outline";
                 showToast("⏸️ Micro arrêté");
             } else {
                 try {
-                    state.isListening = true;
-                    state.recognition.start();
+                    simState.listening = true;
+                    simState.recognition.start();
                     setStatus("À votre tour !", "listening");
-                    micBtn.textContent = "🛑 Arrêter le micro";
-                    micBtn.className = "btn btn-danger";
+                    btn.textContent = "🛑 Arrêter le micro";
+                    btn.className = "btn btn-danger";
                     showToast("🎙️ Micro activé");
                 } catch(e) {
-                    showToast("❌ Erreur accès microphone");
+                    showToast("❌ Erreur microphone");
                 }
             }
         }
 
-        // ============================================================
-        // CHECKLIST
-        // ============================================================
-        function toggleCheck(el) {
-            el.classList.toggle('checked');
-        }
-
-        // ============================================================
-        // TOAST
-        // ============================================================
-        function showToast(message, duration = 3000) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => toast.classList.remove('show'), duration);
-        }
-
-        // ============================================================
-        // PROGRESS
-        // ============================================================
-        function updateProgress() {
-            const fill = document.getElementById('progress-fill');
-            const total = allWords.length;
-            const current = state.currentQuizIndex + 1;
-            const percentage = (current / total) * 100;
-            fill.style.width = Math.min(percentage, 100) + '%';
-        }
-
-        // ============================================================
-        // NAVIGATION
-        // ============================================================
+        // --- NAVIGATION ---
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(el => {
                 el.classList.remove('active');
-                el.setAttribute('aria-selected', 'false');
             });
             document.getElementById('tab-' + tabId).classList.add('active');
             btn.classList.add('active');
-            btn.setAttribute('aria-selected', 'true');
-            
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            if (state.isListening && state.recognition) toggleListening();
-            
-            if (tabId === 'pronunciation') {
-                renderAllWords(document.getElementById('searchWords').value || '');
-            }
+            if (simState.listening && simState.recognition) toggleListening();
         }
 
         // ============================================================
         // INIT
         // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
-            renderAllWords('');
-            initQuiz();
-            state.recognition = initSpeechRecognition();
-            
-            // Score initial
-            document.getElementById('score-value').textContent = '0';
+            renderWords('');
+            renderQuestions('general-questions', generalQuestions);
+            renderQuestions('technical-questions', technicalQuestions);
+            renderQuestions('behavioral-questions', behavioralQuestions);
+            renderQuestionsToAsk();
+            simState.recognition = initRecognition();
         });
     </script>
 </body>
